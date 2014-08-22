@@ -8,5 +8,9 @@ module Honkr
       @user_id = user_id
       @content = content
     end
+
+    def set_id(id)
+      @id = id
+    end
   end
 end
