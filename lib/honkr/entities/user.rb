@@ -19,8 +19,5 @@ module Honkr
       Digest::SHA1.hexdigest(password) == @password_digest
     end
 
-    def set_id(id)
-      @id = id
-    end
   end
 end
