@@ -1,5 +1,6 @@
 module DoubleDog
   class SignIn
+    include FailureSuccess
 
     def run(params)
       return failure(:nil_username) if params[:username].nil?
@@ -17,14 +18,14 @@ module DoubleDog
       return success(:user => retrieved_user, :session_id => session_id)
     end
 
-  private
+  # private
 
-    def failure(error_name)
-      return :success? => false, :error => error_name
-    end
+  #   def failure(error_name)
+  #     return :success? => false, :error => error_name
+  #   end
 
-    def success(data)
-      return data.merge(:success? => true)
-    end
+  #   def success(data)
+  #     return data.merge(:success? => true)
+  #   end
   end
 end
