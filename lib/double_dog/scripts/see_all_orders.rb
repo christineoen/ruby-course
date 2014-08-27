@@ -1,7 +1,6 @@
 module DoubleDog
-  class SeeAllOrders
-    include Admin
-    include FailureSuccess
+  class SeeAllOrders < TransactionScript
+    include Auth
 
     def run(params)
       return failure(:not_admin) unless admin_session?(params[:admin_session])

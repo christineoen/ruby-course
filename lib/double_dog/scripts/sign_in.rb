@@ -1,6 +1,9 @@
 module DoubleDog
-  class SignIn
-    include FailureSuccess
+  class SignIn < TransactionScript
+
+    def self.run(params)
+      self.new.run(params)
+    end
 
     def run(params)
       return failure(:nil_username) if params[:username].nil?

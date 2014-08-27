@@ -4,11 +4,19 @@ describe DoubleDog::CreateAccount do
 
   describe 'Validation' do
 
-    describe 'validation when creator is not an admin' do
+    describe 'when creator is not an admin' do
 
-      it "requires the creator to be an admin" do
+      it "requires the user to be an admin" do
         script = DoubleDog::CreateAccount.new
         expect(script).to receive(:admin_session?).and_return(false)
+
+        # script = DoubleDog::CreateAccount.new
+        # subject == described_class.new
+        
+        # script = described_class.new
+        # script = subject
+
+
 
         result = script.run(:session_id => 'nope', :username => 'a', :password => 'b')
         expect(result[:success?]).to eq false
@@ -17,7 +25,7 @@ describe DoubleDog::CreateAccount do
 
     end
 
-    describe 'validation when creator is admin' do
+    describe 'when user is an admin' do
 
       before do
         @script = DoubleDog::CreateAccount.new

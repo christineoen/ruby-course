@@ -4,7 +4,7 @@ describe DoubleDog::CreateItem do
 
   describe 'Validation' do
 
-    describe 'user is not an admin' do
+    describe 'when user is not an admin' do
 
       it "requires the user to be an admin" do
         script = DoubleDog::CreateItem.new

@@ -1,7 +1,6 @@
 module DoubleDog
-  class CreateAccount
-    include Admin
-    include FailureSuccess
+  class CreateAccount < TransactionScript
+    include Auth
 
     def run(params)
       return failure(:not_admin) unless admin_session?(params[:session_id])
