@@ -1,0 +1,35 @@
+<div class="row">
+
+	<h1>Menu Items</h1>
+	<table>
+	    <thead>
+	        <th>Item</th>
+	        <th>Price</th>
+	    </thead>
+	<tbody>
+	    <% @items.each do |item| %>
+	    <tr>
+	        <td> <%= item.name %> </td>
+	        <td> <%= number_to_currency(item.price) %> </td>
+	    </tr>
+	    <% end %>
+	</tbody>
+	</table>
+
+</div>
+
+<div class="row">
+
+	<h4>Add new menu item:</h4>
+
+	<%= form_tag("/items", method: "post") do %>
+		<%= label_tag('item[name]', "Name:") %>
+		<%= text_field_tag('item[name]') %>
+
+		<%= label_tag('item[price]', "Price:") %>
+		<%= text_field_tag('item[price]') %>
+
+		<%= submit_tag("Submit") %>
+	<% end %>
+
+</div>
