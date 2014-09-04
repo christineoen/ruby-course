@@ -4,6 +4,10 @@ shared_examples 'a database' do
 # describe DoubleDog::Database::InMemory do
   let(:db) { described_class.new }
 
+  before do
+    db.clear
+  end
+
   it "creates a user" do
     user = db.create_user(:username => 'alice', :password => 'pass1')
     expect(user.id).to_not be_nil
@@ -103,7 +107,8 @@ shared_examples 'a database' do
     retrieved_order = db.get_order(order.id)
     expect(retrieved_order).to be_a DoubleDog::Order
     expect(retrieved_order.employee_id).to eq(emp.id)
-    expect(retrieved_order.items).to include(item_1, item_2, item_3)
+    # expect(retrieved_order.items.map {|item| item.id }).to include(item_1.id, item_2.id, item_3.id)
+    expect(retrieved_order.items.map &:id).to include(item_1.id, item_2.id, item_3.id)
   end
 
   it "grabs all orders" do

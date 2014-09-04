@@ -7,5 +7,9 @@ module DoubleDog
       @name = name
       @price = price
     end
+
+    # def ==(other_item)
+    #   self.id == other_item.id && self.name == other_item.name && self.price == other_item.price
+    # end
   end
 end

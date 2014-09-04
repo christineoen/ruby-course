@@ -79,6 +79,9 @@ module DoubleDog
           Order.new(attrs[:id], attrs[:employee_id], attrs[:items])
         end
       end
+
+      def clear
+      end
     end
   end
 end

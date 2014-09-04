@@ -7,14 +7,11 @@ module DoubleDog
       end
 
       class Item < ActiveRecord::Base
-        belongs_to :order
-        # has_many :orders
         has_many :order_items
         has_many :orders, :through => :order_items
       end
 
       class Order < ActiveRecord::Base
-        # has_many :items
         belongs_to :user
         has_many :order_items
         has_many :items, :through => :order_items
@@ -45,11 +42,11 @@ module DoubleDog
         DoubleDog::User.new(ar_user.id, ar_user.username, ar_user.password)
       end
 
-      # def create_session(attrs)
-      # end
+      def create_session(attrs)
+      end
 
-      # def get_user_by_session_id(sid)
-      # end
+      def get_user_by_session_id(sid)
+      end
 
       def get_user_by_username(username)
         ar_user = User.find_by_username(username)
@@ -70,12 +67,9 @@ module DoubleDog
       end
 
       def all_items
-        items = Item.all
+        ar_items = Item.all
+        items = ar_items.map {|item| DoubleDog::Item.new(item.id, item.name, item.price)}
       end
-
-      # def all_items_in_order(id)
-      #   items = OrderItem.find(id)
-      # end
 
       def create_order(attrs)
         ar_order = Order.new
@@ -89,26 +83,29 @@ module DoubleDog
           ar_order_item.save
         end
 
-        items_in_order = ar_order.items
-
-        array = items_in_order.map{|item| DoubleDog::Item.new(item.id, item.name, item.price) }
-
-        # items_in_order = all_items_in_order(ar_order.id)
-        
-        order = DoubleDog::Order.new(ar_order.id, ar_order.user_id, array)
+        ar_items = ar_order.items
+        items = ar_items.map {|item| DoubleDog::Item.new(item.id, item.name, item.price)}
+        order = DoubleDog::Order.new(ar_order.id, ar_order.user_id, items)
       end
 
       def get_order(id)
         ar_order = Order.find(id)
-        DoubleDog::Order.new(ar_order.id, ar_order.user_id, ar_order.items)
+        ar_items = ar_order.items
+        items = ar_items.map {|item| DoubleDog::Item.new(item.id, item.name, item.price)}
+        DoubleDog::Order.new(ar_order.id, ar_order.user_id, items)
       end
 
       def all_orders
-        orders = Order.all
+        ar_orders = Order.all
+        orders = ar_orders.map {|order| DoubleDog::Order.new(order.id, order.user_id, order.items)}
       end
 
+      def clear
+        User.delete_all
+        Item.delete_all
+        Order.delete_all
+        OrderItem.delete_all
+      end
     end
-
   end
-
 end
