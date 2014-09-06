@@ -1,8 +1,9 @@
 require File.join(Rails.root, '../lib/double_dog.rb')
+DoubleDog.db = DoubleDog::Database::SQL.new
 
 ### Stub authentication
 # Create a user
-user = DoubleDog.db.create_user(:username => 'alice', :password => 'pass1', :admin => true)
+# user = DoubleDog.db.create_user(:username => 'alice', :password => 'pass1', :admin => true)
 
 # Sign in that user
 result = DoubleDog::SignIn.new.run(:username => 'alice', password: 'pass1')

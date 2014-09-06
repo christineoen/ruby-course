@@ -5,7 +5,7 @@ class ItemsController < ApplicationController
   end
 
   def create
-    i_params = item_params.merge(:session_id => $session_id)
+    i_params = params[:item].merge(:session_id => $session_id)
     i_params[:price] = i_params[:price].to_f
     item = DoubleDog::CreateItem.new.run(i_params)
     redirect_to :back
@@ -13,7 +13,7 @@ class ItemsController < ApplicationController
 
   private
   def item_params
-    params.require(:item).permit(:name, :price)
+    # params.require(:item).permit(:name, :price)
   end
 
 end

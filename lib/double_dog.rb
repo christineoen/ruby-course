@@ -2,8 +2,14 @@ require 'pry-byebug'
 require 'active_record'
 
 module DoubleDog
+  # def self.db
+  #   @__db_instance ||= Database::InMemory.new
+  # end
+  def self.db=(db_instance)
+    @__db_instance = db_instance
+  end
   def self.db
-    @__db_instance ||= Database::InMemory.new
+    @__db_instance
   end
 end
 

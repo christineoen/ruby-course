@@ -1,0 +1,22 @@
+
+<div class="row">
+	<h1>Order ID: <%=@order.id%></h1>
+
+	<table>
+		<thead>
+			<th>Item</th>
+			<th>Price</th>
+			<th>Quantity</th>
+		</thead>
+		<tbody>
+			<% @item_quantity_hash.each do |item, quantity| %>
+			<tr>
+				<td><%= item %></td>
+				<td><%= number_to_currency(@item_price_hash[item]) %></td>
+				<td><%= quantity %></td>
+			</tr>
+			<% end %>
+		</tbody>
+
+	</table>
+</div>

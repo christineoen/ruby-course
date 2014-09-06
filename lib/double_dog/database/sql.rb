@@ -22,6 +22,12 @@ module DoubleDog
         belongs_to :item
       end
 
+      # class Session < ActiveRecord::Base
+      #   id
+      #   session_id => asfushfakfh42ksdh3eddsd
+      #   user_id
+      # end
+
       # order = Order.find(id)
       # order.user #returns active record user
 
@@ -39,13 +45,19 @@ module DoubleDog
 
       def get_user(id)
         ar_user = User.find(id)
-        DoubleDog::User.new(ar_user.id, ar_user.username, ar_user.password)
+        DoubleDog::User.new(ar_user.id, ar_user.username, ar_user.password, ar_user.admin)
       end
 
       def create_session(attrs)
+        # Generate session_id token
+        # Session.create
+        # Return the session's session_id
+        attrs[:user_id]
       end
 
       def get_user_by_session_id(sid)
+        get_user(sid)
+        # session = Session.find_by(session_id: sid)
       end
 
       def get_user_by_username(username)
